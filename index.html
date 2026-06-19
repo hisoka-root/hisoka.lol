@@ -10,18 +10,16 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:        #0a070e;
-    --bg2:       #120a1a;
-    --card-bg:   #16091f;
-    --magenta:   #e8106e;
-    --magenta-d: #9e0a4a;
-    --gold:      #c4a020;
-    --gold-l:    #e8c040;
-    --purple:    #5c2880;
-    --purple-l:  #7a40a8;
-    --text:      #ede8f4;
-    --muted:     #887898;
-    --border:    #2a1540;
+    --bg:       #0a070e;
+    --card-bg:  #16091f;
+    --magenta:  #e8106e;
+    --gold:     #c4a020;
+    --gold-l:   #e8c040;
+    --purple:   #5c2880;
+    --purple-l: #7a40a8;
+    --text:     #ede8f4;
+    --muted:    #776688;
+    --border:   #2a1540;
   }
 
   html { scroll-behavior: smooth; }
@@ -35,7 +33,6 @@
     overflow-x: hidden;
   }
 
-  /* ── NOISE TEXTURE OVERLAY ── */
   body::before {
     content: '';
     position: fixed;
@@ -58,16 +55,13 @@
     padding: 4rem 2rem;
   }
 
-  /* Radial glow behind hero content */
   .hero::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -55%);
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(ellipse, rgba(232,16,110,0.12) 0%, rgba(92,40,128,0.08) 40%, transparent 70%);
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(232,16,110,0.10) 0%, rgba(92,40,128,0.07) 40%, transparent 70%);
     pointer-events: none;
     animation: pulse 6s ease-in-out infinite;
   }
@@ -77,7 +71,6 @@
     50%       { opacity: 1;   transform: translate(-50%, -55%) scale(1.08); }
   }
 
-  /* ── CARD SUIT SYMBOLS (ambient) ── */
   .suit-bg {
     position: absolute;
     inset: 0;
@@ -86,118 +79,80 @@
   }
   .suit-bg span {
     position: absolute;
-    font-size: clamp(60px, 12vw, 140px);
     opacity: 0.03;
-    color: var(--magenta);
     user-select: none;
     animation: drift 20s ease-in-out infinite;
+    font-size: 140px;
+    color: var(--magenta);
   }
-  .suit-bg span:nth-child(1) { top: 5%;  left: 8%;  animation-delay: 0s;   color: var(--magenta); font-size: 180px; }
-  .suit-bg span:nth-child(2) { top: 15%; right: 6%; animation-delay: -5s;  color: var(--gold); }
-  .suit-bg span:nth-child(3) { bottom: 20%; left: 12%; animation-delay: -10s; color: var(--purple-l); }
-  .suit-bg span:nth-child(4) { bottom: 10%; right: 10%; animation-delay: -15s; color: var(--magenta); font-size: 100px; }
+  .suit-bg span:nth-child(1) { top: 4%;  left: 6%;   animation-delay: 0s;   font-size: 200px; }
+  .suit-bg span:nth-child(2) { top: 12%; right: 5%;  animation-delay: -5s;  color: var(--gold); font-size: 120px; }
+  .suit-bg span:nth-child(3) { bottom: 18%; left: 10%; animation-delay: -10s; color: var(--purple-l); }
+  .suit-bg span:nth-child(4) { bottom: 8%;  right: 8%; animation-delay: -15s; font-size: 100px; }
 
   @keyframes drift {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    0%, 100% { transform: translateY(0px)   rotate(0deg); }
     33%       { transform: translateY(-18px) rotate(3deg); }
-    66%       { transform: translateY(10px) rotate(-2deg); }
+    66%       { transform: translateY(10px)  rotate(-2deg); }
   }
 
-  /* ── HERO CONTENT ── */
   .hero-inner {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 700px;
-  }
-
-  .hero-eyebrow {
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
+    max-width: 680px;
   }
 
   .hero-name {
     font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(3rem, 10vw, 7rem);
+    font-size: clamp(3.5rem, 11vw, 7.5rem);
     font-weight: 900;
     line-height: 0.95;
-    letter-spacing: -0.01em;
-    background: linear-gradient(135deg, var(--text) 0%, var(--magenta) 50%, var(--gold) 100%);
+    background: linear-gradient(135deg, var(--text) 0%, var(--magenta) 55%, var(--gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 0.4rem;
-    position: relative;
+    margin-bottom: 1rem;
   }
 
-  /* The teardrop — signature mark */
-  .teardrop {
-    display: inline-block;
-    width: 10px;
-    height: 14px;
-    background: var(--gold);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    transform: rotate(180deg);
-    vertical-align: middle;
-    margin-left: 10px;
-    box-shadow: 0 0 12px var(--gold);
-    animation: drip 4s ease-in-out infinite;
-  }
-
-  @keyframes drip {
-    0%, 80%, 100% { transform: rotate(180deg) scaleY(1); }
-    90%            { transform: rotate(180deg) scaleY(1.3); }
-  }
-
-  .hero-sub {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    margin: 1.8rem 0 2.5rem;
-    line-height: 1.7;
-  }
-
-  .hero-sub strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  /* ── FACE MARKS ROW ── */
   .marks {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.2rem;
-    margin-bottom: 3rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
   .star-mark {
-    width: 24px;
-    height: 24px;
+    width: 20px; height: 20px;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     background: var(--magenta);
-    box-shadow: 0 0 18px var(--magenta);
+    box-shadow: 0 0 14px var(--magenta);
   }
   .divider-line {
     height: 1px;
-    width: 60px;
+    width: 50px;
     background: linear-gradient(90deg, transparent, var(--border), transparent);
   }
   .tear-mark {
-    width: 12px;
-    height: 18px;
+    width: 11px; height: 16px;
     background: var(--gold);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     transform: rotate(180deg);
-    box-shadow: 0 0 12px var(--gold-l);
+    box-shadow: 0 0 10px var(--gold-l);
+    animation: drip 4s ease-in-out infinite;
+  }
+  @keyframes drip {
+    0%, 80%, 100% { transform: rotate(180deg) scaleY(1); }
+    90%            { transform: rotate(180deg) scaleY(1.35); }
   }
 
-  /* ── LINKS ROW ── */
+  .hero-bio {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
   .hero-links {
     display: flex;
     gap: 1rem;
@@ -207,62 +162,44 @@
 
   .btn {
     font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 0.75rem 1.8rem;
+    padding: 0.7rem 1.6rem;
     border-radius: 2px;
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.2s ease;
   }
-
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.06));
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-
-  .btn:hover::before { opacity: 1; }
-
   .btn-primary {
     background: var(--magenta);
     color: #fff;
-    box-shadow: 0 0 20px rgba(232,16,110,0.35);
+    box-shadow: 0 0 18px rgba(232,16,110,0.3);
   }
   .btn-primary:hover {
-    background: #f5207e;
-    box-shadow: 0 0 35px rgba(232,16,110,0.55);
+    box-shadow: 0 0 32px rgba(232,16,110,0.5);
     transform: translateY(-1px);
   }
-
   .btn-ghost {
     background: transparent;
     color: var(--gold);
     border: 1px solid var(--gold);
   }
   .btn-ghost:hover {
-    background: rgba(196,160,32,0.1);
-    box-shadow: 0 0 20px rgba(196,160,32,0.2);
+    background: rgba(196,160,32,0.08);
+    box-shadow: 0 0 18px rgba(196,160,32,0.18);
     transform: translateY(-1px);
   }
 
-  /* ── SCROLL HINT ── */
   .scroll-hint {
     position: absolute;
-    bottom: 2rem;
-    left: 50%;
+    bottom: 2rem; left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    color: var(--muted);
-    font-size: 0.65rem;
+    color: var(--border);
+    font-size: 0.6rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     font-family: 'Cinzel', serif;
@@ -271,94 +208,78 @@
   .scroll-hint::after {
     content: '';
     width: 1px;
-    height: 40px;
+    height: 0;
     background: linear-gradient(to bottom, var(--muted), transparent);
-    animation: grow 2s ease-in-out infinite;
+    animation: grow 2.2s ease-in-out infinite;
   }
   @keyframes grow {
-    0% { height: 0; opacity: 0; }
-    50% { height: 40px; opacity: 1; }
+    0%   { height: 0;    opacity: 0; }
+    50%  { height: 40px; opacity: 1; }
     100% { height: 40px; opacity: 0; }
   }
 
-  /* ── SECTION LAYOUT ── */
-  section {
-    max-width: 900px;
+  /* ── SHARED LAYOUT ── */
+  .section {
+    max-width: 860px;
     margin: 0 auto;
-    padding: 6rem 2rem;
+    padding: 5rem 2rem;
   }
 
   .suit-divider {
-    text-align: center;
-    margin: 0 auto;
-    padding: 3rem 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
+    padding: 2.5rem 0;
     max-width: 400px;
+    margin: 0 auto;
   }
   .suit-divider::before,
   .suit-divider::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border));
   }
-  .suit-divider::after {
-    background: linear-gradient(90deg, var(--border), transparent);
-  }
-  .suit-divider-sym {
-    color: var(--magenta);
-    font-size: 1.2rem;
-    opacity: 0.6;
-  }
+  .suit-divider::before { background: linear-gradient(90deg, transparent, var(--border)); }
+  .suit-divider::after  { background: linear-gradient(90deg, var(--border), transparent); }
+  .suit-divider-sym { color: var(--magenta); font-size: 1rem; opacity: 0.5; letter-spacing: 0.3em; }
 
-  /* ── SECTION HEADER ── */
   .section-label {
     font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.45em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem;
   }
   .section-title {
     font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
   }
-  .section-body {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.8;
-    max-width: 600px;
-    margin-bottom: 3rem;
-  }
-  .section-body strong { color: var(--text); font-weight: 500; }
 
-  /* ── PROJECT CARDS ── */
+  /* ── PROJECTS ── */
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2rem;
   }
 
   .project-card {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.8rem;
+    border-radius: 3px;
+    padding: 1.6rem;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     text-decoration: none;
     display: block;
     color: inherit;
   }
-
   .project-card::before {
     content: '';
     position: absolute;
@@ -366,187 +287,237 @@
     height: 2px;
     background: linear-gradient(90deg, var(--magenta), var(--purple));
     opacity: 0;
-    transition: opacity 0.25s;
+    transition: opacity 0.2s;
   }
-
   .project-card:hover {
-    border-color: rgba(232,16,110,0.35);
+    border-color: rgba(232,16,110,0.3);
     transform: translateY(-3px);
-    box-shadow: 0 8px 40px rgba(232,16,110,0.12);
+    box-shadow: 0 8px 36px rgba(232,16,110,0.1);
   }
   .project-card:hover::before { opacity: 1; }
 
-  .project-card-suit {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+  .project-suit {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
     display: block;
+    color: var(--magenta);
     opacity: 0.7;
   }
-  .red-suit  { color: var(--magenta); }
-  .black-suit { color: var(--purple-l); }
-  .gold-suit { color: var(--gold); }
-
   .project-title {
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.02em;
+    margin-bottom: 0.4rem;
   }
   .project-desc {
-    font-size: 0.85rem;
+    font-size: 0.83rem;
     color: var(--muted);
     line-height: 1.7;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
   }
-  .project-link-text {
+  .project-arrow {
     font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--magenta);
+    transition: color 0.2s;
   }
-  .project-card:hover .project-link-text {
-    color: var(--gold);
-  }
+  .project-card:hover .project-arrow { color: var(--gold); }
 
-  /* Arrow */
-  .project-link-text::after {
-    content: ' →';
-    transition: letter-spacing 0.2s;
-  }
-  .project-card:hover .project-link-text::after {
-    letter-spacing: 0.05em;
-  }
-
-  /* ── COMMONFORM HIGHLIGHT ── */
+  /* ── COMMONFORM ── */
   .cf-card {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
+    border-left: 3px solid var(--gold);
+    border-radius: 3px;
+    padding: 1.8rem 2rem;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
-    position: relative;
-    overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: all 0.25s;
-  }
-  .cf-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, var(--gold), var(--magenta));
+    transition: all 0.2s;
+    margin-bottom: 1rem;
   }
   .cf-card:hover {
-    border-color: rgba(196,160,32,0.4);
-    box-shadow: 0 8px 40px rgba(196,160,32,0.1);
+    border-color: rgba(196,160,32,0.45);
+    border-left-color: var(--gold-l);
+    box-shadow: 0 6px 32px rgba(196,160,32,0.08);
     transform: translateY(-2px);
   }
+  .cf-card-left {}
+  .cf-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  .cf-desc {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
   .cf-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(196,160,32,0.08);
+    border: 1px solid rgba(196,160,32,0.22);
+    padding: 0.28rem 0.7rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .cf-badge.purple {
+    color: var(--purple-l);
+    background: rgba(122,64,168,0.08);
+    border-color: rgba(122,64,168,0.22);
+  }
+  @media (max-width: 520px) {
+    .cf-card { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── BLOG / WRITING ── */
+  .posts-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .post-item {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: padding-left 0.2s;
+    position: relative;
+  }
+  .post-item:first-child { border-top: 1px solid var(--border); }
+  .post-item:hover { padding-left: 0.6rem; }
+
+  .post-date {
     font-family: 'Cinzel', serif;
     font-size: 0.6rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(196,160,32,0.1);
-    border: 1px solid rgba(196,160,32,0.25);
-    padding: 0.3rem 0.8rem;
-    border-radius: 2px;
-    white-space: nowrap;
+    color: var(--magenta);
+    opacity: 0.7;
+    margin-bottom: 0.3rem;
   }
-  .cf-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
+  .post-title {
+    font-size: 1rem;
+    font-weight: 500;
     color: var(--text);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.4;
+    transition: color 0.2s;
   }
-  .cf-desc {
-    font-size: 0.85rem;
+  .post-item:hover .post-title { color: var(--gold); }
+
+  .post-excerpt {
+    font-size: 0.82rem;
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  @media (max-width: 560px) {
-    .cf-card { grid-template-columns: 1fr; }
-  }
-
-  /* ── CONTACT / FOOTER ── */
-  .footer-section {
-    border-top: 1px solid var(--border);
-    padding: 5rem 2rem;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .footer-section .section-title { text-align: center; margin-bottom: 0.8rem; }
-
-  .social-links {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 2.5rem;
-  }
-
-  .social-link {
+  /* loading / error states */
+  .posts-state {
+    padding: 2.5rem 0;
+    color: var(--muted);
+    font-size: 0.85rem;
     font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
+  }
+  .posts-state.error { color: var(--magenta); opacity: 0.7; }
+
+  .substack-link {
+    display: inline-block;
+    margin-top: 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--muted);
     text-decoration: none;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid transparent;
-    transition: all 0.2s;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .substack-link:hover { color: var(--magenta); border-color: var(--magenta); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 4rem 2rem;
+    max-width: 860px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
   }
-  .social-link:hover { color: var(--magenta); border-bottom-color: var(--magenta); }
+
+  .footer-left {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--text), var(--magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+  }
+  .footer-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--magenta); }
 
   .footer-copy {
-    margin-top: 4rem;
-    font-size: 0.72rem;
-    color: #3a2850;
+    width: 100%;
+    font-size: 0.65rem;
+    color: #2a1a3a;
     font-family: 'Cinzel', serif;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
   }
 
-  .footer-suit-row {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    opacity: 0.2;
-    font-size: 1rem;
-    color: var(--magenta);
-  }
-
-  /* ── FADE-IN ANIMATION ── */
+  /* ── FADE UP ── */
   .fade-up {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 600px) {
-    section { padding: 4rem 1.5rem; }
-    .hero { padding: 3rem 1.5rem; }
+    .section { padding: 4rem 1.4rem; }
+    .hero    { padding: 3rem 1.4rem; }
+    footer   { padding: 3rem 1.4rem; }
   }
-
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .fade-up { opacity: 1; transform: none; }
@@ -555,19 +526,14 @@
 </head>
 <body>
 
-<!-- ══════════ HERO ══════════ -->
+<!-- HERO -->
 <div class="hero">
   <div class="suit-bg">
-    <span>♥</span>
-    <span>♦</span>
-    <span>♠</span>
-    <span>♣</span>
+    <span>♥</span><span>♦</span><span>♠</span><span>♣</span>
   </div>
 
   <div class="hero-inner">
-    <p class="hero-eyebrow">developer &nbsp;·&nbsp; builder &nbsp;·&nbsp; admin</p>
-
-    <h1 class="hero-name">hisoka<span class="teardrop"></span></h1>
+    <h1 class="hero-name">hisoka</h1>
 
     <div class="marks">
       <div class="divider-line"></div>
@@ -577,134 +543,162 @@
       <div class="divider-line"></div>
     </div>
 
-    <p class="hero-sub">
-      Independent developer. Root Admin at <strong>Commonform</strong>.<br>
-      Building open-source tools and community infrastructure.
+    <p class="hero-bio">
+      root @ commonform &nbsp;·&nbsp; writes stuff &nbsp;·&nbsp; builds things
     </p>
 
     <div class="hero-links">
-      <a class="btn btn-primary" href="https://github.com/hisoka-root" target="_blank" rel="noopener">
-        ♠ &nbsp; GitHub
-      </a>
-      <a class="btn btn-ghost" href="https://commonform.io" target="_blank" rel="noopener">
-        ♦ &nbsp; Commonform
-      </a>
+      <a class="btn btn-primary" href="https://github.com/hisoka-root" target="_blank" rel="noopener">♠ github</a>
+      <a class="btn btn-ghost"   href="https://commonform.io"          target="_blank" rel="noopener">♦ commonform</a>
     </div>
   </div>
 
   <div class="scroll-hint">scroll</div>
 </div>
 
-<!-- Suit divider -->
+<!-- WRITING -->
 <div class="suit-divider"><span class="suit-divider-sym">♥ ♦ ♣ ♠</span></div>
 
-<!-- ══════════ PROJECTS ══════════ -->
-<section>
-  <p class="section-label fade-up">Open Source</p>
-  <h2 class="section-title fade-up">The Hand I'm Playing</h2>
-  <p class="section-body fade-up">
-    A selection of projects crafted and maintained — tools built to last, not to impress.
-  </p>
+<div class="section">
+  <p class="section-label fade-up">writing</p>
+  <h2 class="section-title fade-up">from the substack</h2>
+
+  <div id="posts-container" class="posts-list">
+    <p class="posts-state" id="posts-status">loading posts...</p>
+  </div>
+
+  <a class="substack-link fade-up" href="https://substack.com/@ilovehisoka" target="_blank" rel="noopener">
+    all posts on substack →
+  </a>
+</div>
+
+<!-- PROJECTS -->
+<div class="suit-divider"><span class="suit-divider-sym">♠</span></div>
+
+<div class="section">
+  <p class="section-label fade-up">code</p>
+  <h2 class="section-title fade-up">repos</h2>
 
   <div class="projects-grid">
-
     <a class="project-card fade-up" href="https://github.com/hisoka-root/rsstoat" target="_blank" rel="noopener">
-      <span class="project-card-suit red-suit">♥</span>
+      <span class="project-suit">♥</span>
       <div class="project-title">rsstoat</div>
-      <p class="project-desc">
-        RSS tooling — pulling structured feeds from the noise.
-        A utility for working with syndication at the source.
-      </p>
-      <span class="project-link-text">View on GitHub</span>
+      <p class="project-desc">rss tooling. pulls structured feeds from the noise.</p>
+      <span class="project-arrow">github →</span>
     </a>
 
     <a class="project-card fade-up" href="https://github.com/hisoka-root/open-collective-mybb" target="_blank" rel="noopener">
-      <span class="project-card-suit red-suit">♦</span>
+      <span class="project-suit">♦</span>
       <div class="project-title">open-collective-mybb</div>
-      <p class="project-desc">
-        Bridging Open Collective's transparent funding infrastructure
-        with the MyBB forum ecosystem. Community meets finance.
-      </p>
-      <span class="project-link-text">View on GitHub</span>
+      <p class="project-desc">open collective integration for mybb. money stuff meets forum stuff.</p>
+      <span class="project-arrow">github →</span>
     </a>
-
   </div>
-</section>
+</div>
 
-<!-- Suit divider -->
-<div class="suit-divider"><span class="suit-divider-sym">♠</span></div>
+<!-- COMMONFORM -->
+<div class="suit-divider"><span class="suit-divider-sym">♦</span></div>
 
-<!-- ══════════ COMMONFORM ══════════ -->
-<section>
-  <p class="section-label fade-up">Administration</p>
-  <h2 class="section-title fade-up">Commonform</h2>
-  <p class="section-body fade-up">
-    Root Admin (Management) for Commonform — a community-focused platform with a sharp, deliberate aesthetic.
-    Involved at the infrastructure level: from architecture to culture.
-  </p>
+<div class="section">
+  <p class="section-label fade-up">admin</p>
+  <h2 class="section-title fade-up">commonform</h2>
 
   <a class="cf-card fade-up" href="https://commonform.io" target="_blank" rel="noopener">
-    <div>
+    <div class="cf-card-left">
       <div class="cf-title">commonform.io</div>
-      <p class="cf-desc">
-        A neo-brutalist forum and community platform. Built for people who care
-        about the craft of communication — form and function in balance.
-      </p>
+      <p class="cf-desc">the site. neo-brutalist forum platform. come post.</p>
     </div>
-    <div class="cf-badge">Root Admin</div>
+    <span class="cf-badge">root admin</span>
   </a>
 
-  <div style="margin-top:1rem;">
-    <a class="cf-card fade-up" href="https://github.com/commonformhq" target="_blank" rel="noopener" style="margin-top:1rem;">
-      <div>
-        <div class="cf-title">commonformhq</div>
-        <p class="cf-desc">
-          The GitHub organisation behind Commonform — where the code lives,
-          issues are tracked, and the platform takes shape.
-        </p>
-      </div>
-      <div class="cf-badge" style="color:var(--purple-l); background:rgba(122,64,168,0.1); border-color:rgba(122,64,168,0.25);">GitHub Org</div>
-    </a>
-  </div>
-</section>
-
-<!-- ══════════ FOOTER ══════════ -->
-<footer>
-  <div class="suit-divider"><span class="suit-divider-sym">♥ ♦ ♣ ♠</span></div>
-
-  <div class="footer-section">
-    <p class="section-label">Find me</p>
-    <h2 class="section-title">Links</h2>
-
-    <div class="social-links">
-      <a class="social-link" href="https://github.com/hisoka-root" target="_blank" rel="noopener">
-        ♠ &nbsp; github/hisoka-root
-      </a>
-      <a class="social-link" href="https://github.com/commonformhq" target="_blank" rel="noopener">
-        ♦ &nbsp; github/commonformhq
-      </a>
-      <a class="social-link" href="https://commonform.io" target="_blank" rel="noopener">
-        ♥ &nbsp; commonform.io
-      </a>
+  <a class="cf-card fade-up" href="https://github.com/commonformhq" target="_blank" rel="noopener">
+    <div class="cf-card-left">
+      <div class="cf-title">commonformhq</div>
+      <p class="cf-desc">github org. where the codebase lives.</p>
     </div>
+    <span class="cf-badge purple">github org</span>
+  </a>
+</div>
 
-    <div class="footer-suit-row">♥ &nbsp; ♦ &nbsp; ♣ &nbsp; ♠</div>
-    <p class="footer-copy">hisoka &nbsp; · &nbsp; all cards on the table</p>
-  </div>
+<!-- FOOTER -->
+<div class="suit-divider"><span class="suit-divider-sym">♥ ♦ ♣ ♠</span></div>
+
+<footer>
+  <div class="footer-left">hisoka</div>
+  <nav class="footer-links">
+    <a class="footer-link" href="https://github.com/hisoka-root"      target="_blank" rel="noopener">github</a>
+    <a class="footer-link" href="https://substack.com/@ilovehisoka"   target="_blank" rel="noopener">substack</a>
+    <a class="footer-link" href="https://commonform.io"               target="_blank" rel="noopener">commonform</a>
+    <a class="footer-link" href="https://github.com/commonformhq"    target="_blank" rel="noopener">commonformhq</a>
+  </nav>
+  <p class="footer-copy">♥ ♦ ♣ ♠</p>
 </footer>
 
 <script>
-  // Fade-up on scroll
-  const els = document.querySelectorAll('.fade-up');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  els.forEach(el => io.observe(el));
+// ── Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 70);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── Substack RSS — direct fetch (Substack sets CORS allow-all on feeds)
+const FEED_URL = 'https://ilovehisoka.substack.com/feed';
+
+function renderPosts(items) {
+  const container = document.getElementById('posts-container');
+  container.innerHTML = '';
+  items.slice(0, 6).forEach(item => {
+    const title   = item.querySelector('title')?.textContent   || 'untitled';
+    const link    = item.querySelector('link')?.textContent    || '#';
+    const rawDate = item.querySelector('pubDate')?.textContent || '';
+    const desc    = item.querySelector('description')?.textContent || '';
+
+    const tmp = document.createElement('div');
+    tmp.innerHTML = desc;
+    const excerpt = tmp.textContent.trim().slice(0, 160);
+
+    const date = rawDate ? new Date(rawDate).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    }) : '';
+
+    const el = document.createElement('a');
+    el.className = 'post-item fade-up';
+    el.href      = link;
+    el.target    = '_blank';
+    el.rel       = 'noopener';
+    el.innerHTML = `
+      ${date    ? `<div class="post-date">${date}</div>` : ''}
+      <div class="post-title">${title}</div>
+      ${excerpt ? `<p class="post-excerpt">${excerpt}…</p>` : ''}
+    `;
+    container.appendChild(el);
+    obs.observe(el);
+  });
+}
+
+async function loadPosts() {
+  const status = document.getElementById('posts-status');
+  try {
+    const res = await fetch(FEED_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const txt  = await res.text();
+    const xml  = new DOMParser().parseFromString(txt, 'text/xml');
+    const items = Array.from(xml.querySelectorAll('item'));
+    if (!items.length) throw new Error('no items in feed');
+    renderPosts(items);
+  } catch (err) {
+    console.warn('RSS load failed:', err);
+    status.textContent = 'couldn\'t load posts right now.';
+    status.classList.add('error');
+  }
+}
+
+loadPosts();
 </script>
 </body>
 </html>
