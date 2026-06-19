@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hisoka-landing",
+  "compatibility_date": "2026-06-19",
+  "assets": {
+    "directory": "."
+  },
+  "compatibility_flags": ["nodejs_compat"]
+}
